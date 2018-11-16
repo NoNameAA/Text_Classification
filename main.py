@@ -12,6 +12,9 @@ import nltk
 from nltk.tokenize import RegexpTokenizer
 from nltk.probability import FreqDist
 from nltk.corpus import movie_reviews
+from sklearn import tree
+from sklearn.model_selection import KFold
+
 # nltk.download('movie_reviews')
 
 def input_data():
@@ -34,7 +37,7 @@ def input_data():
 	word_dis = FreqDist()
 
 	for file in txt_files:
-		with open(file, 'r') as f:
+		with open(file, 'r', encoding="utf8") as f:
 			limit -= 1
 			if limit == 0:
 				break
@@ -69,7 +72,7 @@ def input_data():
 	limit = 10000
 
 	for file in txt_files:
-		with open(file, 'r') as f:
+		with open(file, 'r', encoding="utf8") as f:
 			limit -= 1
 			if limit == 0:
 				break
@@ -87,10 +90,46 @@ def input_data():
 
 			X.append(words)
 			Y.append([1])
-	
-	print(word_dis)
 
-	
+	#========================================
+
+	# print(word_dis.most_common(30))
+	feature_limit = 50
+	word_features = []
+	for word_feature in word_dis.most_common(feature_limit):
+		word_features.append(word_feature[0])
+		
+	features_list = []
+	x = []
+	for i in range(len(X)):
+		features = {}
+		temp_x = []
+		for word in word_features:
+			features['contains({})'.format(word)] = (word in X[i])
+			temp_x.append(int(word in X[i]))
+		x.append(temp_x)
+		features_list.append(features)
+
+	# print(np.shape(x), np.shape(Y))	
+
+	#=======================================
+	clf = tree.DecisionTreeClassifier()
+
+	kf = KFold(n_splits = 20, shuffle = True)
+
+	x = np.array(x)
+	y = np.array(Y)
+
+	for train, test in kf.split(x):
+		x_train, x_test, y_train, y_test = x[train], x[test], y[train], y[test]
+		clf = clf.fit(x_train, y_train)
+		accuracy = clf.score(x_test, y_test)
+		print(accuracy)
+		# print("%s %s" % (train, test))
+
+	# clf = clf.fit(x, Y)
+	# accuracy = clf.score(x[], Y[])
+	# print(accuracy)
 
 def training_model(txt_df):
 

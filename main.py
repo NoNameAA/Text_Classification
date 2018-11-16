@@ -14,6 +14,7 @@ from nltk.probability import FreqDist
 from nltk.corpus import movie_reviews
 from sklearn import tree
 from sklearn.model_selection import KFold
+from sklearn.neural_network import MLPClassifier
 
 # nltk.download('movie_reviews')
 
@@ -94,7 +95,7 @@ def input_data():
 	#========================================
 
 	# print(word_dis.most_common(30))
-	feature_limit = 50
+	feature_limit = 1000
 	word_features = []
 	for word_feature in word_dis.most_common(feature_limit):
 		word_features.append(word_feature[0])
@@ -113,23 +114,45 @@ def input_data():
 	# print(np.shape(x), np.shape(Y))	
 
 	#=======================================
-	clf = tree.DecisionTreeClassifier()
-
-	kf = KFold(n_splits = 20, shuffle = True)
 
 	x = np.array(x)
-	y = np.array(Y)
+	y = np.array(Y).ravel()
+
+	# for max_feature in range(10, feature_limit):
+	# 	clf = tree.DecisionTreeClassifier(max_features = max_feature)
+	# 	acc = training(clf, 15, x, y)
+	# 	print("max_feature = ", max_feature, "acc = ", acc)
+
+	#=======================================	
+
+	
+	for i in range(2, 30):
+		for j in range(2, 30):	
+			clf = MLPClassifier(solver='lbfgs', \
+								alpha=1e-5, \
+								hidden_layer_sizes=(i, j), \
+								random_state=1)
+			acc = training(clf, 10, x, y)
+			print("l1 = ", i, "l2 = ", j, "acc = ", acc)
+
+
+
+
+
+def training(model, n_split, data_x, data_y):
+	clf = model
+	kf = KFold(n_splits = n_split, shuffle = True)
+	x = data_x
+	y = data_y
+
+	accuracy = 0
 
 	for train, test in kf.split(x):
 		x_train, x_test, y_train, y_test = x[train], x[test], y[train], y[test]
 		clf = clf.fit(x_train, y_train)
-		accuracy = clf.score(x_test, y_test)
-		print(accuracy)
-		# print("%s %s" % (train, test))
+		accuracy = max(accuracy, clf.score(x_test, y_test))
 
-	# clf = clf.fit(x, Y)
-	# accuracy = clf.score(x[], Y[])
-	# print(accuracy)
+	return accuracy
 
 def training_model(txt_df):
 

@@ -1,12 +1,18 @@
 import pandas as pd
 import numpy as np
 from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
 import glob
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn import model_selection
 from sklearn import tree
-
+import string
+import nltk
+from nltk.tokenize import RegexpTokenizer
+from nltk.probability import FreqDist
+from nltk.corpus import movie_reviews
+# nltk.download('movie_reviews')
 
 def input_data():
 
@@ -15,39 +21,75 @@ def input_data():
 	
 	# with open(txt_files[0], 'r') as myfile:
 	# 	data = myfile.read().replace('\n', '')
+	
+	limit = 10000
 
-	txt_df = pd.DataFrame(columns = ['word', 'truth'])	
+	stop_words = set(stopwords.words('english'))
 
-	limit = 100
+	tokenizer = RegexpTokenizer(r'\w+')
+
+	X = []
+	Y = []
+
+	word_dis = FreqDist()
 
 	for file in txt_files:
 		with open(file, 'r') as f:
 			limit -= 1
 			if limit == 0:
 				break
-			text = f.read().replace('\n', '')								
-			txt_df = txt_df.append(pd.DataFrame({'word': [text], 'truth': 0}))
+			text = f.read().replace('\n', '')				
+			text = tokenizer.tokenize(text)
+
+			words = []
+
+			for w in text:
+				if w not in stop_words:
+					words.append(w)			
+
+			for word in words:
+				word_dis[word.lower()] += 1
+
+			X.append(words)
+			Y.append([0])
+			
+	# print(word_dis.most_common(30))	
+
+	# print(Y)
+
+	# print("_______________________")
+
+	#==========================================#
 
 	# truth: {0 == Fake, 1 == Real}
 
 	path = r'./fake-real-news/train/real/'
 	txt_files = glob.glob(path + "*.txt")
 
+	limit = 10000
 
-	limit = 100
 	for file in txt_files:
 		with open(file, 'r') as f:
 			limit -= 1
 			if limit == 0:
 				break
-			text = f.read().replace('\n', '')								
-			txt_df = txt_df.append(pd.DataFrame({'word': [text], 'truth': 1}))
+			text = f.read().replace('\n', '')				
+			text = tokenizer.tokenize(text)
 
-	txt_df = txt_df.reset_index(drop=True)	
+			words = []
 
-	# txt_df.word = txt_df.word.apply(word_tokenize)
+			for w in text:
+				if w not in stop_words:
+					words.append(w)			
+
+			for word in words:
+				word_dis[word.lower()] += 1
+
+			X.append(words)
+			Y.append([1])
 	
-	return txt_df
+	print(word_dis)
+
 	
 
 def training_model(txt_df):
@@ -79,5 +121,5 @@ def training_model(txt_df):
 
 if __name__  ==  "__main__":
 
-	txt_df = input_data()
-	training_model(txt_df)
+	input_data()
+	# training_model(txt_df)

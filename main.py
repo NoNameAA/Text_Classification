@@ -15,16 +15,14 @@ from nltk.corpus import movie_reviews
 from sklearn import tree
 from sklearn.model_selection import KFold
 from sklearn.neural_network import MLPClassifier
-
-# nltk.download('movie_reviews')
+import seaborn as sns; sns.set()
+import matplotlib.pyplot as plt
 
 def input_data():
 
 	path = r'./fake-real-news/train/fake/'
 	txt_files = glob.glob(path + "*.txt")
 	
-	# with open(txt_files[0], 'r') as myfile:
-	# 	data = myfile.read().replace('\n', '')
 	
 	limit = 10000
 
@@ -57,11 +55,6 @@ def input_data():
 			X.append(words)
 			Y.append([0])
 			
-	# print(word_dis.most_common(30))	
-
-	# print(Y)
-
-	# print("_______________________")
 
 	#==========================================#
 
@@ -94,8 +87,7 @@ def input_data():
 
 	#========================================
 
-	# print(word_dis.most_common(30))
-	feature_limit = 1000
+	feature_limit = 500
 	word_features = []
 	for word_feature in word_dis.most_common(feature_limit):
 		word_features.append(word_feature[0])
@@ -111,33 +103,62 @@ def input_data():
 		x.append(temp_x)
 		features_list.append(features)
 
-	# print(np.shape(x), np.shape(Y))	
-
-	#=======================================
-
 	x = np.array(x)
 	y = np.array(Y).ravel()
 
-	# for max_feature in range(10, feature_limit):
-	# 	clf = tree.DecisionTreeClassifier(max_features = max_feature)
-	# 	acc = training(clf, 15, x, y)
-	# 	print("max_feature = ", max_feature, "acc = ", acc)
 
-	#=======================================	
+	accuracy_list = []
+	x_list = []
 
-	
-	for i in range(2, 30):
-		for j in range(2, 30):	
-			clf = MLPClassifier(solver='lbfgs', \
+
+	################## Option 1 Different node in layer 1 ##################
+
+	# layer_1 = 2
+	# while layer_1 <= 100:
+
+	# 	clf = MLPClassifier(solver='lbfgs', \
+	# 							alpha=1e-5, \
+	# 							hidden_layer_sizes=(layer_1, 2), \
+	# 							random_state=1, \
+	# 							learning_rate_init=0.25)
+	# 	acc = training(clf, 10, x, y)
+
+	# 	accuracy_list.append(acc)
+	# 	x_list.append(layer_1)
+	# 	print("layer_1 = ", layer_1, "accuracy = ", acc)
+	# 	layer_1 += 1
+
+	# result = pd.DataFrame({'layer_1': x_list, 'accuracy': accuracy_list})
+
+	# ax = sns.lineplot(x="layer_1", y="accuracy", data=result)
+	# plt.show()
+
+	########################################################################
+
+
+	################### Option 2 Different learning rate ###################
+
+	learning_rate = 0.01
+	while learning_rate <= 1:
+
+		clf = MLPClassifier(solver='lbfgs', \
 								alpha=1e-5, \
-								hidden_layer_sizes=(i, j), \
-								random_state=1)
-			acc = training(clf, 10, x, y)
-			print("l1 = ", i, "l2 = ", j, "acc = ", acc)
+								hidden_layer_sizes=(3, 20), \
+								random_state=1, \
+								learning_rate_init=learning_rate)
+		acc = training(clf, 10, x, y)
 
+		accuracy_list.append(acc)
+		x_list.append(learning_rate)
+		print("learning_rate = ", learning_rate, "accuracy = ", acc)
+		learning_rate += 0.03
 
+	result = pd.DataFrame({'learning_rate': x_list, 'accuracy': accuracy_list})
 
+	ax = sns.lineplot(x="learning_rate", y="accuracy", data=result)
+	plt.show()
 
+	########################################################################
 
 def training(model, n_split, data_x, data_y):
 	clf = model
@@ -150,34 +171,9 @@ def training(model, n_split, data_x, data_y):
 	for train, test in kf.split(x):
 		x_train, x_test, y_train, y_test = x[train], x[test], y[train], y[test]
 		clf = clf.fit(x_train, y_train)
-		accuracy = max(accuracy, clf.score(x_test, y_test))
+		accuracy += clf.score(x_test, y_test)
 
-	return accuracy
-
-def training_model(txt_df):
-
-
-
-	x_train, x_test, y_train, y_test = model_selection.train_test_split( \
-										txt_df.word, \
-										txt_df.truth, \
-										test_size = 0.1)
-
-
-	# print(x_train)
-
-	count_vect = CountVectorizer()
-	x_train_counts = count_vect.fit_transform(x_train)
-
-	# print(x_train_counts)
-	tfidf_transformer = TfidfTransformer(use_idf=True)
-	x_train_tfidf = tfidf_transformer.fit_transform(x_train_counts)
-
-	print(y_train)
-	print(x_train_tfidf)
-
-	clf = tree.DecisionTreeClassifier()			   
-	clf = clf.fit(x_train_tfidf, y_train)
+	return accuracy / n_split
 
 
 

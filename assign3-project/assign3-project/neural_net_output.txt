@@ -1,0 +1,7 @@
+This fild contains the highest accuracy of two options:
+
+Option 1: Different size of layer 1
+layer_1 =  80 accuracy =  0.847
+
+Option 2: The effect of learning rate for accuracy
+learning_rate =  0.67 accuracy =  0.8243

@@ -1,0 +1,246 @@
+=== Run information ===
+
+Scheme:       weka.classifiers.trees.J48 -C 0.2 -M 2
+Relation:     F__FIC&SFU_sfu_cmpt310_assignment_hw3_fake-real-news-1500_fake-real-news_train-weka.filters.unsupervised.attribute.StringToWordVector-R1-W1000-prune-rate-1.0-N0-stemmerweka.core.stemmers.SnowballStemmer-stopwords-handlerweka.core.stopwords.WordsFromFile -stopwords "C:\\Program Files\\Weka-3-8"-M1-tokenizerweka.core.tokenizers.WordTokenizer -delimiters " \r\n\t.,;:\'\"()?!"-weka.filters.supervised.attribute.AttributeSelection-Eweka.attributeSelection.CfsSubsetEval -P 1 -E 1-Sweka.attributeSelection.BestFirst -D 1 -N 5
+Instances:    3000
+Attributes:   60
+              -
+              0
+              2016
+              But
+              By
+              Email
+              GOP
+              Hillary’s
+              House
+              Obama
+              Oct
+              October
+              Republican
+              Republicans
+              Share
+              That
+              US
+              attacks
+              debate
+              food
+              http
+              https
+              leaders
+              president
+              s
+              said
+              speech
+              t
+              whether
+              |
+              “
+              –
+              --
+              Cruz
+              Fox
+              Gov
+              Monday
+              Rubio
+              Sen
+              Sunday
+              Thursday
+              Tuesday
+              center
+              conference
+              conservative
+              contributed
+              convention
+              didn
+              lawmakers
+              m
+              nomination
+              polarization
+              primary
+              re
+              reform
+              remarks
+              same-sex
+              senator
+               
+              @@class@@
+Test mode:    10-fold cross-validation
+
+=== Classifier model (full training set) ===
+
+J48 pruned tree
+------------------
+
+Share <= 0
+|     <= 0
+|   |   -- <= 0
+|   |   |   nomination <= 0
+|   |   |   |   Sen <= 0
+|   |   |   |   |   didn <= 0
+|   |   |   |   |   |   October <= 0
+|   |   |   |   |   |   |   Email <= 0
+|   |   |   |   |   |   |   |   0 <= 0
+|   |   |   |   |   |   |   |   |   lawmakers <= 0
+|   |   |   |   |   |   |   |   |   |   | <= 0
+|   |   |   |   |   |   |   |   |   |   |   Oct <= 0
+|   |   |   |   |   |   |   |   |   |   |   |   contributed <= 0
+|   |   |   |   |   |   |   |   |   |   |   |   |   t <= 0
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   http <= 0
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   Monday <= 0
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   “ <= 0
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   - <= 0
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   s <= 0
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   GOP <= 0
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   By <= 0
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   conservative <= 0
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   speech <= 0
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   House <= 0
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   2016 <= 0
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   US <= 0
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   Obama <= 0
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   said <= 0: fake (173.0/45.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   said > 0
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   Thursday <= 0
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   whether <= 0
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   – <= 0
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   Fox <= 0
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   That <= 0: real (30.0/11.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   That > 0: fake (7.0/2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   Fox > 0: fake (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   – > 0: fake (10.0/3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   whether > 0: fake (14.0/3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   Thursday > 0: real (7.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   Obama > 0
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   – <= 0: real (34.0/4.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   – > 0: fake (5.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   US > 0
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   Thursday <= 0
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   Tuesday <= 0: fake (33.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   Tuesday > 0: real (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   Thursday > 0: real (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   2016 > 0: fake (74.0/11.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   House > 0
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   US <= 0
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   – <= 0: real (36.0/9.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   – > 0
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   Obama <= 0: fake (4.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   Obama > 0: real (4.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   US > 0: fake (12.0/2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   speech > 0: real (26.0/7.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   conservative > 0
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   That <= 0
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   – <= 0
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   leaders <= 0: real (14.0/2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   leaders > 0: fake (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   – > 0: fake (6.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   That > 0: real (14.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   By > 0: fake (93.0/9.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   GOP > 0: real (47.0/10.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   s > 0
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   2016 <= 0: real (124.0/29.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   2016 > 0: fake (29.0/11.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   - > 0: fake (60.0/4.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   “ > 0: fake (45.0/4.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   Monday > 0
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   2016 <= 0: real (50.0/6.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   2016 > 0
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   By <= 0
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   Republican <= 0: fake (8.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   Republican > 0: real (4.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   By > 0: real (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   http > 0: fake (27.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   t > 0
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   - <= 0: real (126.0/17.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   - > 0
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   That <= 0: fake (17.0/2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   That > 0: real (3.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   contributed > 0
+|   |   |   |   |   |   |   |   |   |   |   |   |   US <= 0
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   “ <= 0: real (51.0/3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   “ > 0: fake (3.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   US > 0: fake (3.0)
+|   |   |   |   |   |   |   |   |   |   |   Oct > 0
+|   |   |   |   |   |   |   |   |   |   |   |   Fox <= 0: fake (47.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   Fox > 0: real (3.0/1.0)
+|   |   |   |   |   |   |   |   |   |   | > 0: fake (58.0/3.0)
+|   |   |   |   |   |   |   |   |   lawmakers > 0: real (39.0/3.0)
+|   |   |   |   |   |   |   |   0 > 0: fake (140.0/11.0)
+|   |   |   |   |   |   |   Email > 0: fake (76.0/1.0)
+|   |   |   |   |   |   October > 0
+|   |   |   |   |   |   |   primary <= 0: fake (310.0/16.0)
+|   |   |   |   |   |   |   primary > 0
+|   |   |   |   |   |   |   |   senator <= 0
+|   |   |   |   |   |   |   |   |   s <= 0: fake (15.0/1.0)
+|   |   |   |   |   |   |   |   |   s > 0
+|   |   |   |   |   |   |   |   |   |   House <= 0: fake (4.0/1.0)
+|   |   |   |   |   |   |   |   |   |   House > 0: real (5.0)
+|   |   |   |   |   |   |   |   senator > 0: real (3.0)
+|   |   |   |   |   didn > 0
+|   |   |   |   |   |   - <= 0
+|   |   |   |   |   |   |   Email <= 0: real (72.0/5.0)
+|   |   |   |   |   |   |   Email > 0: fake (2.0)
+|   |   |   |   |   |   - > 0
+|   |   |   |   |   |   |   debate <= 0: fake (5.0)
+|   |   |   |   |   |   |   debate > 0: real (2.0)
+|   |   |   |   Sen > 0
+|   |   |   |   |   - <= 0
+|   |   |   |   |   |   president <= 0
+|   |   |   |   |   |   |   Email <= 0
+|   |   |   |   |   |   |   |   October <= 0: real (51.0/6.0)
+|   |   |   |   |   |   |   |   October > 0
+|   |   |   |   |   |   |   |   |   2016 <= 0: real (2.0)
+|   |   |   |   |   |   |   |   |   2016 > 0: fake (3.0)
+|   |   |   |   |   |   |   Email > 0: fake (6.0)
+|   |   |   |   |   |   president > 0: real (79.0/2.0)
+|   |   |   |   |   - > 0: fake (8.0/1.0)
+|   |   |   nomination > 0: real (194.0/15.0)
+|   |   -- > 0
+|   |   |   - <= 0: real (333.0/15.0)
+|   |   |   - > 0
+|   |   |   |   s <= 0: fake (4.0)
+|   |   |   |   s > 0
+|   |   |   |   |   | <= 0
+|   |   |   |   |   |   US <= 0
+|   |   |   |   |   |   |   said <= 0
+|   |   |   |   |   |   |   |   t <= 0: real (3.0)
+|   |   |   |   |   |   |   |   t > 0: fake (2.0)
+|   |   |   |   |   |   |   said > 0: real (21.0)
+|   |   |   |   |   |   US > 0
+|   |   |   |   |   |   |   GOP <= 0: fake (4.0)
+|   |   |   |   |   |   |   GOP > 0: real (2.0)
+|   |   |   |   |   | > 0: fake (4.0)
+|     > 0: real (129.0)
+Share > 0: fake (170.0)
+
+Number of Leaves  : 	71
+
+Size of the tree : 	141
+
+
+Time taken to build model: 1.32 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances        2567               85.5667 %
+Incorrectly Classified Instances       433               14.4333 %
+Kappa statistic                          0.7113
+Mean absolute error                      0.1937
+Root mean squared error                  0.3485
+Relative absolute error                 38.7354 %
+Root relative squared error             69.6903 %
+Total Number of Instances             3000     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0.861    0.149    0.852      0.861    0.856      0.711    0.893     0.872     fake
+                 0.851    0.139    0.859      0.851    0.855      0.711    0.893     0.869     real
+Weighted Avg.    0.856    0.144    0.856      0.856    0.856      0.711    0.893     0.871     
+
+=== Confusion Matrix ===
+
+    a    b   <-- classified as
+ 1291  209 |    a = fake
+  224 1276 |    b = real
+
